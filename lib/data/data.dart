@@ -53,7 +53,7 @@ class NoteDB extends ApiCalls {
     
     print('dsd');
        var response =await dio.post<NoteModel>('http://test-api-flutter-app.herokuapp.com/create',
-        data: {'id': 12, 'title': 'wendu', 'content': 'wendu'},
+        data: value.toJson(),
         options: Options(headers: {
           'Content-type': 'application/json; charset=UTF-8',
         }));
