@@ -5,7 +5,6 @@ part 'get_all_notes_resp.g.dart';
 
 @JsonSerializable()
 class GetAllNotesResp {
-
   @JsonKey(name: 'data')
   List<NoteModel> data;
 

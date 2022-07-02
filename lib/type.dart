@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Type extends StatelessWidget {
   const Type({Key? key}) : super(key: key);
 
@@ -14,7 +13,7 @@ class Type extends StatelessWidget {
     );
   }
 }
-   
+
 class Semlist extends StatelessWidget {
   const Semlist({Key? key}) : super(key: key);
 
@@ -44,16 +43,16 @@ class Semlist extends StatelessWidget {
             ),
             child: Center(
               child: TextButton(
-                child: const Text("Type 1",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18
-                ),
-                ),
-                 onPressed: () {
-                        Navigator.of(context).pushNamed('file');}
-                ),
+                  child: const Text(
+                    "Type 1",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 18),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('file');
+                  }),
             ),
           );
         },

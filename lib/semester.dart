@@ -26,27 +26,41 @@ class Semlist extends StatelessWidget {
       ),
       primary: false,
       padding: const EdgeInsets.all(20),
-      itemCount: 20,
+      itemCount: 6,
       itemBuilder: (context, index) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: InkWell(
-            child: Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: Colors.blue),
-              padding: const EdgeInsets.all(8),
-              child: const Center(
-                  child: Text(
-                "Tile 3",
-                style:
-                    TextStyle(fontWeight: FontWeight.w800, color: Colors.white),
-              )),
-            ),
-            onTap: () {
-              Navigator.of(context).pushNamed('type');
-            },
+        return TextButton(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 60,
+                width: 64,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 3,
+                          spreadRadius: 4)
+                    ]),
+                child: const Center(
+                    child: Text(
+                  "S1",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 18,
+                      color: Colors.white),
+                )),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text("Semester 1")
+            ],
           ),
+          onPressed: () {
+            Navigator.of(context).pushNamed('subject');
+          },
         );
       },
     ));

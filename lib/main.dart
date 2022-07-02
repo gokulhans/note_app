@@ -4,14 +4,23 @@ import 'dart:developer';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:note_app/data/data.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:badges/badges.dart';
+import 'package:flutter/material.dart';
+import 'package:note_app/data/data.dart';
+import 'package:note_app/data/data.temp.dart';
+import 'package:note_app/home.dart';
+import 'package:note_app/courses.dart';
+import 'package:note_app/profile.dart';
+import 'package:note_app/sidebar.dart';
+import 'package:note_app/new_note.dart';
 import 'package:note_app/semester.dart';
 import 'package:note_app/subject.dart';
 import 'package:note_app/module.dart';
+import 'package:note_app/syllabus.dart';
 import 'package:note_app/type.dart';
 import 'package:note_app/file.dart';
 import 'package:note_app/login.dart';
-import 'package:note_app/signup.dart';
-import 'package:note_app/sidebar.dart';
 import 'package:note_app/splashscreen.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
@@ -131,18 +140,60 @@ class Test extends StatelessWidget {
         ),
         shape: BoxShape.circle,
       ),
+      routes: {
+        'semester': (ctx) {
+          return const Semester();
+        },
+        'subject': (ctx) {
+          return const Subject();
+        },
+        'module': (ctx) {
+          return const Module();
+        },
+        'type': (ctx) {
+          return const Type();
+        },
+        'file': (ctx) {
+          return const File();
+        },
+        'login': (ctx) {
+          return const MyLogin();
+        },
+        'splash': (ctx) {
+          return const Splash();
+        },
+        // 'new': (ctx) {
+          // return const New_Note();
+        // },
+        'noti': (ctx) {
+          return const Noti();
+        },
+      },
+      debugShowCheckedModeBanner: false,
+      // home: MainPage(),
+      home: MainPage(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
+ Future<void> saveNote() async {
+
+    final data = NoteDB().getAllNotes();
+    print(data);
+    
+  }
+
+
 
 class _MainPageState extends State<MainPage> {
+  int currentIndex = 0;
+  final screens = [Home(), Courses(), Syllabus(), Profile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,6 +209,10 @@ class _MainPageState extends State<MainPage> {
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w800),
         ),
         actions: [
+          TextButton(onPressed: (){
+             print('vcalled');
+              saveNote();
+          }, child: Text('test')),
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 24),
             icon: Badge(
@@ -168,7 +223,9 @@ class _MainPageState extends State<MainPage> {
               showBadge: true,
               badgeContent: Text(""),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed('noti');
+            },
           )
         ],
         iconTheme: IconThemeData(color: Colors.green),
@@ -506,7 +563,8 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() => currentIndex = index),
           unselectedLabelStyle: const TextStyle(
             color: Colors.grey,
           ),
@@ -528,7 +586,7 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Courses'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.graphic_eq_outlined), label: 'Trending'),
+                icon: Icon(Icons.graphic_eq_outlined), label: 'Syllabus'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle), label: 'Profile'),
           ]),
