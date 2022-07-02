@@ -1,24 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:note_app/data/data.dart';
 import 'package:note_app/data/note_model/note_model.dart';
 
-void main() {
-  runApp(const MyApp());
+class New_Note extends StatefulWidget {
+  const New_Note({Key? key}) : super(key: key);
+
+  @override
+  State<New_Note> createState() => _New_NoteState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class _New_NoteState extends State<New_Note> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: AddNote(),
-    );
+    return AddNote();
   }
 }
 
@@ -50,7 +44,6 @@ class AddNote extends StatelessWidget {
           savedButton,
         ],
       ),
-      drawer: Drawer(),
       body: Container(
         child: Column(
           children: [
@@ -79,7 +72,6 @@ class AddNote extends StatelessWidget {
     final content = _contentController.text;
     _titleController.text = '';
     _contentController.text = '';
- 
 
     final _newNote = NoteModel.create(
         id: DateTime.now().microsecondsSinceEpoch.toString(),
@@ -87,4 +79,7 @@ class AddNote extends StatelessWidget {
         content: content);
     NoteDB().createNote(_newNote);
   }
+
+
+  
 }

@@ -22,7 +22,7 @@ class Semlist extends StatelessWidget {
     return Center(
         child: GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
       ),
       primary: false,
       padding: const EdgeInsets.all(20),
