@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:note_app/data/data.dart';
 import 'package:note_app/semester.dart';
 import 'package:note_app/subject.dart';
 import 'package:note_app/module.dart';
@@ -10,9 +14,68 @@ import 'package:note_app/signup.dart';
 import 'package:note_app/sidebar.dart';
 import 'package:note_app/splashscreen.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
+}
+
+class FetchData extends StatefulWidget {
+  const FetchData({Key? key}) : super(key: key);
+
+  @override
+  _FetchDataState createState() => _FetchDataState();
+}
+
+class _FetchDataState extends State<FetchData> {
+  Future getUserData() async {
+    var response =
+        await http.get(Uri.https('studygramcu.herokuapp.com', 'courses') );
+    var jsonData = jsonDecode(response.body);
+    
+    List<User> users = [];
+
+    for (var u in jsonData) {
+      User user = User(u["_id"], u["name"], u["item"]);
+      users.add(user);
+    }
+   
+    print(users);
+    return users;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+          child: Card(
+              child: FutureBuilder(
+                  future: getUserData(),
+                  builder: (context, AsyncSnapshot snapshot ) {
+                    if (snapshot.data == null) {
+                      return Center(
+                        child: Text('loading'),
+                      );
+                    } else {
+                      return ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, i) {
+                            return ListTile(
+                              title: Text(snapshot.data[i].item),
+                              subtitle: Text(snapshot.data[i].name),
+                              trailing: Text(snapshot.data[i].id),
+                            );
+                          });
+                    }
+                  }))),
+    );
+  }
+}
+
+class User {
+  final String _id, name, item;
+
+  User(this._id, this.name, this.item);
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +86,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         // home: MainPage(),
-        home: const MainPage(),
+        home: const FetchData(),
         routes: {
           'semester': (ctx) {
             return const Semester();
@@ -294,9 +357,12 @@ class _MainPageState extends State<MainPage> {
                         height: 8,
                       ),
                       TextButton(
-                        child: Text("BSc Physics"),
+                        child: Text("TEST"),
                         onPressed: () {
-                          Navigator.of(context).pushNamed('semester');
+                          print('clicked');
+                          final data = saveNote();
+                          print(data);
+                          // Navigator.of(context).pushNamed('semester');
                           // Navigator.pushReplacement(
                           //     context,
                           //     MaterialPageRoute(
@@ -467,5 +533,11 @@ class _MainPageState extends State<MainPage> {
                 icon: Icon(Icons.account_circle), label: 'Profile'),
           ]),
     );
+  }
+
+  Future<void> saveNote() async {
+    final test = NoteDB().test();
+    print(test);
+    return test;
   }
 }

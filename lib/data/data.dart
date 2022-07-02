@@ -33,6 +33,7 @@ abstract class ApiCalls {
   Future<List<NoteModel>> getAllNotes();
   Future<NoteModel?> updateNote(NoteModel value);
   Future<NoteModel> deleteNote(String id);
+  Future test();
 }
 
 class NoteDB extends ApiCalls {
@@ -50,15 +51,15 @@ class NoteDB extends ApiCalls {
     // print(response);
 
     // dio.post('http://127.0.0.1:3000/create/');
-    
+
     print('dsd');
-       var response =await dio.post<NoteModel>('http://test-api-flutter-app.herokuapp.com/create',
+    var response = await dio.post<NoteModel>(
+        'http://test-api-flutter-app.herokuapp.com/create',
         data: value.toJson(),
         options: Options(headers: {
           'Content-type': 'application/json; charset=UTF-8',
         }));
 
-    
     print('d');
     print(response.data);
     print('d');
@@ -88,5 +89,19 @@ class NoteDB extends ApiCalls {
   Future<NoteModel?> updateNote(NoteModel value) async {
     // TODO: implement updateNote
     throw UnimplementedError();
+  }
+
+  @override
+  Future test() async {
+    final testurl =
+        'https://cugram.herokuapp.com/Bca/Semester-1/MFCA/Previous-Question-Papers';
+    final _result = await dio.get(testurl);
+
+    if (_result.data == null) {
+      return ['failed'];
+    } else {
+      print(_result.data!.data);
+      return _result.data;
+    }
   }
 }
