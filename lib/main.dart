@@ -1,20 +1,22 @@
+import 'package:web_socket_channel/io.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:note_app/data/data.dart';
+import 'package:note_app/data/data.temp.dart';
 import 'package:note_app/home.dart';
 import 'package:note_app/courses.dart';
-import 'package:note_app/fav.dart';
 import 'package:note_app/profile.dart';
 import 'package:note_app/sidebar.dart';
 import 'package:note_app/new_note.dart';
 import 'package:note_app/semester.dart';
 import 'package:note_app/subject.dart';
 import 'package:note_app/module.dart';
+import 'package:note_app/syllabus.dart';
 import 'package:note_app/type.dart';
 import 'package:note_app/file.dart';
 import 'package:note_app/login.dart';
 import 'package:note_app/splashscreen.dart';
 import 'package:note_app/noti.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -48,9 +50,9 @@ class MyApp extends StatelessWidget {
         'splash': (ctx) {
           return const Splash();
         },
-        'new': (ctx) {
-          return const New_Note();
-        },
+        // 'new': (ctx) {
+          // return const New_Note();
+        // },
         'noti': (ctx) {
           return const Noti();
         },
@@ -68,10 +70,18 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
+ Future<void> saveNote() async {
+
+    final data = NoteDB().getAllNotes();
+    print(data);
+    
+  }
+
+
 
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
-  final screens = [Home(), Courses(), Fav(), Profile()];
+  final screens = [Home(), Courses(), Syllabus(), Profile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +97,10 @@ class _MainPageState extends State<MainPage> {
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w800),
         ),
         actions: [
+          TextButton(onPressed: (){
+             print('vcalled');
+              saveNote();
+          }, child: Text('test')),
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 24),
             icon: Badge(
@@ -129,7 +143,7 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Courses'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.graphic_eq_outlined), label: 'Fav'),
+                icon: Icon(Icons.graphic_eq_outlined), label: 'Syllabus'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle), label: 'Profile'),
           ]),

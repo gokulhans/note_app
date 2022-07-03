@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Noti extends StatelessWidget {
   const Noti({Key? key}) : super(key: key);
 
@@ -35,23 +34,24 @@ class Semlist extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withOpacity(0.05),)
+                  color: Colors.black.withOpacity(0.05),
+                )
               ],
               // color: Colors.blue,
             ),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24,vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: TextButton(
-                child: const Text("This is a sample notification from admin This is a sample notification from admin This is a sample notification from admin",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15
-                ),
-                ),
-                 onPressed: () {
-                        Navigator.of(context).pushNamed('');}
-                ),
+                  child: const Text(
+                    "This is a sample notification from admin This is a sample notification from admin This is a sample notification from admin",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 15),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('');
+                  }),
             ),
           );
         },

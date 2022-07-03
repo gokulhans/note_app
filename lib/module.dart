@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Module extends StatelessWidget {
   const Module({Key? key}) : super(key: key);
 
@@ -44,16 +43,16 @@ class Semlist extends StatelessWidget {
             ),
             child: Center(
               child: TextButton(
-                child: const Text("Module 1",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18
-                ),
-                ),
-                 onPressed: () {
-                        Navigator.of(context).pushNamed('type');}
-                ),
+                  child: const Text(
+                    "Module 1",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 18),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('type');
+                  }),
             ),
           );
         },

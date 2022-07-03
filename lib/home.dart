@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
-
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: MainPage(),
-       
-        );
+      body: MainPage(),
+    );
   }
 }
-
-
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -26,13 +22,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
-     
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Column(
-          children:
-            [SingleChildScrollView(
-              child: Container(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
                 color: Colors.white,
                 child: Column(children: <Widget>[
                   SizedBox(
@@ -64,6 +60,7 @@ class _MainPageState extends State<MainPage> {
                     height: 24,
                   ),
                   GridView.count(
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     crossAxisCount: 3,
                     children: <Widget>[
@@ -116,10 +113,6 @@ class _MainPageState extends State<MainPage> {
                               child: Text("Login"),
                               onPressed: () {
                                 Navigator.of(context).pushNamed('login');
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Semester()));
                               },
                             )
                           ],
@@ -260,6 +253,38 @@ class _MainPageState extends State<MainPage> {
                               height: 64,
                               width: 64,
                               decoration: BoxDecoration(
+                                  color: Colors.lightGreenAccent,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.05),
+                                        blurRadius: 3,
+                                        spreadRadius: 4)
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            TextButton(
+                              child: Text("BSc Chemistry"),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed('semester');
+                                // Navigator.pushReplacement(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => Semester()));
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 64,
+                              width: 64,
+                              decoration: BoxDecoration(
                                   color: Colors.green,
                                   shape: BoxShape.circle,
                                   boxShadow: [
@@ -317,42 +342,41 @@ class _MainPageState extends State<MainPage> {
                           ],
                         ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            height: 64,
-                            width: 64,
-                            decoration: BoxDecoration(
-                                color: Colors.yellow,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
-                                      blurRadius: 3,
-                                      spreadRadius: 4)
-                                ]),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          TextButton(
-                            child: Text("BA Statistics"),
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('semester');
-                              // Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Semester()));
-                            },
-                          ),
-                        ],
-                      ),
                     ],
-                  )
+                  ),
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10.0),
+                      child: ClipRect(
+                        child: Container(
+                          color: Colors.green[100],
+                          height: 200,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            child: Column(
+                              children: <Widget>[
+                                Image.network(
+                                    'https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190806131525/forkPython.jpg'),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Studygram',
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ]),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
