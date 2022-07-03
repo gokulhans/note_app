@@ -115,9 +115,7 @@ class MyApp extends StatelessWidget {
           'login': (ctx) {
             return const MyLogin();
           },
-          'signup': (ctx) {
-            return const MyRegister();
-          },
+         
           'splash': (ctx) {
             return const Splash();
           },
@@ -140,38 +138,6 @@ class Test extends StatelessWidget {
         ),
         shape: BoxShape.circle,
       ),
-      routes: {
-        'semester': (ctx) {
-          return const Semester();
-        },
-        'subject': (ctx) {
-          return const Subject();
-        },
-        'module': (ctx) {
-          return const Module();
-        },
-        'type': (ctx) {
-          return const Type();
-        },
-        'file': (ctx) {
-          return const File();
-        },
-        'login': (ctx) {
-          return const MyLogin();
-        },
-        'splash': (ctx) {
-          return const Splash();
-        },
-        // 'new': (ctx) {
-          // return const New_Note();
-        // },
-        'noti': (ctx) {
-          return const Noti();
-        },
-      },
-      debugShowCheckedModeBanner: false,
-      // home: MainPage(),
-      home: MainPage(),
     );
   }
 }
@@ -593,9 +559,9 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Future<void> saveNote() async {
-    final test = NoteDB().test();
-    print(test);
-    return test;
-  }
+  // Future<void> saveNote() async {
+  //   final test = NoteDB().test();
+  //   print(test);
+  //   return test;
+  // }
 }
