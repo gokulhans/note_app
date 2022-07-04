@@ -1,13 +1,15 @@
-import 'package:web_socket_channel/io.dart';
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:async';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:note_app/data/data.dart';
-import 'package:note_app/data/data.temp.dart';
+import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:note_app/demoad.dart';
 import 'package:note_app/home.dart';
 import 'package:note_app/courses.dart';
 import 'package:note_app/profile.dart';
 import 'package:note_app/sidebar.dart';
-import 'package:note_app/new_note.dart';
 import 'package:note_app/semester.dart';
 import 'package:note_app/subject.dart';
 import 'package:note_app/module.dart';
@@ -17,9 +19,11 @@ import 'package:note_app/file.dart';
 import 'package:note_app/login.dart';
 import 'package:note_app/splashscreen.dart';
 import 'package:note_app/noti.dart';
+import 'package:note_app/admobhelper.dart';
 
 void main() {
   runApp(const MyApp());
+  MobileAds.instance.initialize();
 }
 
 class MyApp extends StatelessWidget {
@@ -28,12 +32,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        textTheme: const TextTheme(
+          headline1: TextStyle(color: Colors.deepPurpleAccent),
+          headline2: TextStyle(color: Colors.deepPurpleAccent),
+          bodyText2: TextStyle(color: Colors.deepPurpleAccent),
+          subtitle1: TextStyle(color: Colors.pinkAccent),
+        ),
+      ),
       routes: {
         'semester': (ctx) {
-          return const Semester();
+          return Semester(
+            title: 'hh',
+          );
         },
         'subject': (ctx) {
-          return const Subject();
+          return Subject(
+            title: 'd',
+          );
         },
         'module': (ctx) {
           return const Module();
@@ -51,10 +68,10 @@ class MyApp extends StatelessWidget {
           return const Splash();
         },
         // 'new': (ctx) {
-          // return const New_Note();
+        // return const New_Note();
         // },
         'noti': (ctx) {
-          return const Noti();
+          return DemoAd();
         },
       },
       debugShowCheckedModeBanner: false,
@@ -64,20 +81,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// class SplashPage extends StatefulWidget {
+//   @override
+//   _SplashPageState createState() => _SplashPageState();
+// }
+
+// class _SplashPageState extends State<SplashPage> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     Timer(
+//         Duration(seconds: 3),
+//         () => Navigator.pushReplacement(
+//             context, MaterialPageRoute(builder: (context) => MainPage())));
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         color: Colors.white,
+//         child: FlutterLogo(size: MediaQuery.of(context).size.height));
+//   }
+// }
+
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
- Future<void> saveNote() async {
-
-    final data = NoteDB().getAllNotes();
-    print(data);
-    
-  }
-
-
 
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
@@ -87,6 +119,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.white,
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        ),
         backgroundColor: Colors.white,
         bottomOpacity: 0.0,
         elevation: 0.0,
@@ -97,13 +135,10 @@ class _MainPageState extends State<MainPage> {
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.w800),
         ),
         actions: [
-          TextButton(onPressed: (){
-             print('vcalled');
-              saveNote();
-          }, child: Text('test')),
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 24),
             icon: Badge(
+              // ignore: prefer_const_constructors
               child: Icon(
                 Icons.notifications,
                 color: Colors.teal,
@@ -112,6 +147,8 @@ class _MainPageState extends State<MainPage> {
               badgeContent: Text(""),
             ),
             onPressed: () {
+              // AdmobHelper.createInterad();
+              // AdmobHelper.showInterad();
               Navigator.of(context).pushNamed('noti');
             },
           )

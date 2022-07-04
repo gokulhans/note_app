@@ -12,8 +12,8 @@ class CourseDB extends ApiCalls {
   final url = Url();
 
   @override
-  Future<List<Course>> getAllCourses() async{
-       final _result =
+  Future<List<Course>> getAllCourses() async {
+    final _result =
         await dio.get<GetAllCourses>(url.baseUrl + url.getAllCourses);
 
     if (_result.data == null) {
@@ -23,5 +23,3 @@ class CourseDB extends ApiCalls {
     }
   }
 }
-
-

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:note_app/semester.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
       body: MainPage(),
     );
   }
@@ -83,9 +85,16 @@ class _MainPageState extends State<MainPage> {
                             height: 8,
                           ),
                           TextButton(
-                            child: Text("Course"),
+                            child: Text("Bca"),
                             onPressed: () {
-                              Navigator.of(context).pushNamed('semester');
+                              var title = 'Bca/';
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Semester(
+                                          title: title,
+                                        )),
+                              );
                             },
                           )
                         ],
@@ -109,12 +118,19 @@ class _MainPageState extends State<MainPage> {
                             SizedBox(
                               height: 8,
                             ),
-                            TextButton(
-                              child: Text("Login"),
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('login');
-                              },
-                            )
+                             TextButton(
+                            child: Text("Bsc CS"),
+                            onPressed: () {
+                              var title = 'Bsc-CS/Semester-1';
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Semester(
+                                          title: title,
+                                        )),
+                              );
+                            },
+                          )
                           ],
                         ),
                       ),
@@ -137,16 +153,19 @@ class _MainPageState extends State<MainPage> {
                             SizedBox(
                               height: 8,
                             ),
-                            TextButton(
-                              child: Text("SignUp"),
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('signup');
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Semester()));
-                              },
-                            )
+                             TextButton(
+                            child: Text("Bcom"),
+                            onPressed: () {
+                              var title = 'Bcom/Semester-1';
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Semester(
+                                          title: title,
+                                        )),
+                              );
+                            },
+                          )
                           ],
                         ),
                       ),
@@ -169,16 +188,19 @@ class _MainPageState extends State<MainPage> {
                             SizedBox(
                               height: 8,
                             ),
-                            TextButton(
-                              child: Text("Splash"),
-                              onPressed: () {
-                                Navigator.of(context).pushNamed('splash');
-                                // Navigator.pushReplacement(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => Semester()));
-                              },
-                            )
+                             TextButton(
+                            child: Text("BBA"),
+                            onPressed: () {
+                              var title = 'BBA/Semester-1';
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Semester(
+                                          title: title,
+                                        )),
+                              );
+                            },
+                          )
                           ],
                         ),
                       ),

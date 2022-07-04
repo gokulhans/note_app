@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Noti extends StatelessWidget {
   const Noti({Key? key}) : super(key: key);
@@ -8,6 +9,12 @@ class Noti extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Notifications'),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.white,
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        ),
       ),
       body: const Semlist(),
     );

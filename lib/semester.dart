@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:note_app/subject.dart';
 
 class Semester extends StatelessWidget {
-  const Semester({Key? key}) : super(key: key);
-
+   Semester({Key? key,required this.title}) : super(key: key);
+final String title;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Semester'),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.white,
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        ),
       ),
-      body: const Semlist(),
+      body:  Semlist(title: title,),
     );
   }
 }
 
 class Semlist extends StatelessWidget {
-  const Semlist({Key? key}) : super(key: key);
+   Semlist({Key? key,required this.title}) : super(key: key);
+  final String title;
+
 
   @override
   Widget build(BuildContext context) {
+  List<String> semesters = ['Semester-1','Semester-2','Semester-3','Semester-4','Semester-5','Semester-6'];
     return Center(
         child: GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -26,8 +37,8 @@ class Semlist extends StatelessWidget {
       ),
       primary: false,
       padding: const EdgeInsets.all(20),
-      itemCount: 6,
-      itemBuilder: (context, index) {
+      itemCount: semesters.length,
+      itemBuilder: (context, int index) {
         return TextButton(
           child: Column(
             children: <Widget>[
@@ -55,11 +66,17 @@ class Semlist extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-              Text("Semester 1")
+              Text(semesters[index])
             ],
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed('subject');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Subject(
+                        title: title+semesters[index],
+                      )),
+            );
           },
         );
       },

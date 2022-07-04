@@ -5,11 +5,10 @@ part 'get_all_courses.g.dart';
 
 @JsonSerializable()
 class GetAllCourses {
- 
   @JsonKey(name: 'data')
   List<Course> data;
 
-  GetAllCourses({ this.data = const []});
+  GetAllCourses({this.data = const []});
 
   factory GetAllCourses.fromJson(Map<String, dynamic> json) {
     return _$GetAllCoursesFromJson(json);
